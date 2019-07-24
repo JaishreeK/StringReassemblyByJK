@@ -13,6 +13,13 @@ namespace StringReassemblyTest
         StringReassembly strAssembly = new StringReassembly();
 
         [TestMethod]
+        public void TestAssemblyNullInput()
+        {           
+            string result = strAssembly.AssembleStrings(null);
+            Assert.AreEqual("", result);
+        }
+
+        [TestMethod]
         public void TestAssemblyEmptySet()
         {
             List<string> stringSet = new List<string>();
@@ -23,7 +30,7 @@ namespace StringReassemblyTest
         [TestMethod]
         public void TestAssemblyEmptyStrings()
         {            
-            string result = strAssembly.AssembleStrings(new List<string> { "", "" });
+            string result = strAssembly.AssembleStrings(new List<string> { "", ""});
             Assert.IsTrue(result == "");
         }
 
@@ -97,6 +104,7 @@ namespace StringReassemblyTest
             string result = strAssembly.AssembleStrings(arr);
             Assert.AreEqual("gctaagttcatgcatc", result);
         }
+
 
         [TestMethod]
         public void TestAssemblyOverlapEx4()
