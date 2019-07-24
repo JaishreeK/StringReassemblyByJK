@@ -2,10 +2,8 @@ using Microsoft.VisualStudio.TestTools.UnitTesting;
 using StringReassemblyByJK;
 using System.Collections.Generic;
 using System.Diagnostics;
-using System.Linq;
 
 //Test class for testing StringReassembly class methods
-
 namespace StringReassemblyTest
 {
     [TestClass]

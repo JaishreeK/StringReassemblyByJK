@@ -1,22 +1,19 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
 using System.Text;
 
 namespace StringReassemblyByJK
 {
     //Author: Jaishree Kulkarni 
     //Date: 22nd July 2019
-    //Version 1.0.0
+    //Version 0.0.1
 
     //Class library StringReassembly to process a set of strings to check for overlaps and merge them.
-
     public class StringReassembly
     {
-        // Function to calculate maximum overlap in two given strings 
-        public Tuple<int, StringBuilder> FindOverlaps(string str1, string str2)
-        {
-            // maximum overlap length of the matching prefix and suffix
+        // Calculates maximum overlap in two given strings, Returns the distance and overlapping string
+        private Tuple<int, StringBuilder> FindOverlaps(string str1, string str2)
+        {           
             int max = int.MinValue;
             int len1 = str1.Length;
             int len2 = str2.Length;
@@ -27,23 +24,16 @@ namespace StringReassemblyByJK
 
             if (len1 < len2)
             {
-                //if x is substring of y return y
-                if (str2.Contains(str1))
-                {
-                    sb.Clear();
-                    sb.Append(str2);
-                    return new Tuple<int, StringBuilder>(len1, sb);
-                }
+                //if str1 is substring of str2 return str2
+                if (str2.Contains(str1))                  
+                    return new Tuple<int, StringBuilder>(len1, new StringBuilder(str2));
+                
             }
             else
             {
-                //if x is substring of y return y
-                if (str1.Contains(str2))
-                {
-                    sb.Clear();
-                    sb.Append(str1);
-                    return new Tuple<int, StringBuilder>(len2, sb);
-                }
+                //if str2 is substring of str1 return str1
+                if (str1.Contains(str2))                                  
+                    return new Tuple<int, StringBuilder>(len2, new StringBuilder(str1));                
 
             }
 
@@ -78,7 +68,7 @@ namespace StringReassemblyByJK
             return new Tuple<int, StringBuilder>(max, sb);
         }
 
-        //Calculate smallest string that contains each string in the given set as substring. 
+        //Assembles the given strings into one by checking the overlaps and substrings in them. Uses Greedy Match and Merge algorithm. Returns the final result string 
         public string AssembleStrings(List<string> listStr)
         {
             int n = listStr.Count;
@@ -95,16 +85,14 @@ namespace StringReassemblyByJK
             {
                 // check for maximum overlap
                 int max = int.MinValue;
-                // stores index of strings involved in maximum overlap
                 int str1Index = -1, str2Index = -1;
 
-                // to store resultant string after maximum overlap
-                String resStr = "";
+                String resultStr = "";
 
                 for (int i = 0; i < n; i++)
                 {
                     for (int j = i + 1; j < n; j++)
-                    {
+                    {                   
 
                         // r will store maximum length of the matching prefix and suffix. sb stores
                         // the resultant string after maximum overlap of str1 and str2                       
@@ -114,7 +102,7 @@ namespace StringReassemblyByJK
                         if (max < r.Item1)
                         {
                             max = r.Item1;
-                            resStr = r.Item2.ToString();
+                            resultStr = r.Item2.ToString();
                             str1Index = i;
                             str2Index = j;
                         }
@@ -129,9 +117,8 @@ namespace StringReassemblyByJK
                     listStr[0] += listStr[n];
                 }
                 else
-                {
-                    // copy resultant string
-                    listStr[str1Index] = resStr;
+                {                    
+                    listStr[str1Index] = resultStr;
                     listStr[str2Index] = listStr[n];
                 }
             }
