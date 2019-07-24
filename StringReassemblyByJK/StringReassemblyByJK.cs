@@ -17,7 +17,7 @@ namespace StringReassemblyByJK
             int max = int.MinValue;
             int len1 = str1.Length;
             int len2 = str2.Length;
-            StringBuilder sb = new StringBuilder();
+           
 
             // start with minimum length      
             int n = Math.Min(len1, len2);
@@ -36,6 +36,8 @@ namespace StringReassemblyByJK
                     return new Tuple<int, StringBuilder>(len2, new StringBuilder(str1));                
 
             }
+
+            StringBuilder sb = new StringBuilder();
 
             // check suffix of str1 matches with prefix of str2
             for (int i = 1; i <= n; i++)
