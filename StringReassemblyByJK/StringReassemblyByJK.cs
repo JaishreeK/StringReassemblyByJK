@@ -16,15 +16,13 @@ namespace StringReassemblyByJK
         {
             StringBuilder sb = new StringBuilder();
             int max = int.MinValue;
-
+            int n;
             if ((str1 != null) && (str2 != null))
             {                
                 int len1 = str1.Length;
                 int len2 = str2.Length;
 
                 // start with minimum length
-                int n;
-
                 if (len1 < len2)
                 {
                     n = len1;
@@ -41,8 +39,6 @@ namespace StringReassemblyByJK
                         return new Tuple<int, StringBuilder>(len2, new StringBuilder(str1));
 
                 }
-
-                
 
                 // check suffix of str1 matches with prefix of str2
                 for (var i = 1; i <= n; i++)
